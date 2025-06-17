@@ -27,4 +27,21 @@ public actor Httpie {
             return nil
         }
     }
+    
+    public func postFromJson<TReq: Codable, TResp: Codable> (endpoint: String, data body: TReq?) async throws -> TResp? {
+        do {
+            guard let url = URL(string: "\(baseAddress)\(endpoint)") else { return nil }
+            var request = URLRequest(url: url)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "post"
+            
+            let requestBody = try self.encoder.encode(body)
+            
+            let (data, _) = try await URLSession.shared.upload(for: request, from: requestBody)
+            
+            return try self.decoder.decode(TResp.self, from: data)
+        } catch {
+            return nil
+        }
+    }
 }
