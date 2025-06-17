@@ -8,7 +8,7 @@ public actor Httpie {
     private let decoder: JSONDecoder
     private let encoder: JSONEncoder
     
-    init(baseAddress: String) {
+    public init(baseAddress: String) {
         self.baseAddress = baseAddress
         self.decoder = JSONDecoder()
         self.encoder = JSONEncoder()
