@@ -3,7 +3,7 @@ import Testing
 
 @Test func example() async throws {
     struct TestingStruct: Codable {
-        var message: String = ""
+        var message: String?
     }
     // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     let httpClient = Httpie(baseAddress: "http://localhost:5117")
